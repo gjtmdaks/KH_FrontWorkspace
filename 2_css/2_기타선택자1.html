@@ -13,6 +13,7 @@
         선택자 뒤에 []를 붙여서 속성과 속성값을 제시한다.
     </p>
     <pre>
+        선택자[속성=속성값]
         선택자[속성~=속성값]
         선택자[속성|=속성값]
         선택자[속성^=속성값]
@@ -76,10 +77,10 @@
 
     <!-- div{div$}*4 -->
     <div id="test2">div1</div>
-    <div>div2</div>
-    <div>div3</div>
+    <div>div2</div> <!-- #test2+div -->
+    <div>div3</div> <!-- #test2~div -->
     <div>div4</div>
-    <ul>ul요소</ul>
+    <ul>ul요소</ul> <!-- #test2~ul -->
 
     <hr>
 
@@ -123,7 +124,7 @@
     <input type="checkbox" name="" id="b"><label for="b">바나나</label>
     <input type="checkbox" name="" id="c"><label for="c">키위</label>
 
-    <br>
+    <hr>
 
     <pre>
         * 초점(focus)이 맞춰진 요소를 선택
@@ -135,6 +136,21 @@
     아이디 : <input type="text"> <br>
     비밀번호 : <input type="password">
 
-    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <hr>
+
+    <pre>
+        * 활성화 되어있는 요소들을 선택하는 선택자
+        선택자:enabled{
+            ...
+        }
+
+        * 비활성화 되어있는 요소들을 선택하는 선택자
+        선택자:disabled{
+            ...
+        }
+    </pre>
+
+    <button>클릭하세요</button>
+    <button disabled>클릭하지마세요</button>
 </body>
 </html>

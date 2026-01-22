@@ -1,0 +1,92 @@
+.area1{background-color: red;}
+.area2{background-color: orange;}
+.area3{background-color: yellow;}
+.area4{background-color: green;}
+.area5{background-color: blue;}
+
+/* inline요소를 block으로 변경 */
+.block{
+    border: 1px solid black;
+    width: 150px;
+    height: 150px;
+    color: white;
+    
+    display: block;
+}
+
+/* block요소를 inline요소로 변경 */
+.inline{
+    display: inline;
+}
+
+/* inline-block */
+.inline-block{
+    display: inline-block;
+}
+
+/* 상하 2분할 */
+#container-1{
+    border: 3px solid black;
+    width: 323px;
+    height: 500px;
+}
+#container-1>div:first-of-type{
+    background-color: red;
+    height: 30%;
+}
+#container-1>div:last-of-type{
+    background-color: blue;
+    height: 70%;
+}
+
+/* 상하 3분할 */
+#container-2{
+    border: 3px solid black;
+    width: 300px;
+    height: 440px;
+}
+#container-2>:first-child{
+    background-color: yellowgreen;
+    height: 20%;
+}
+#container-2>:nth-child(2){
+    background-color: orangered;
+    height: 30%;
+}
+#container-2>:last-child{
+    background-color: skyblue;
+    height: 50%;
+}
+
+/* 좌우 2분할 */
+#container-3{
+    border: 5px solid red;
+    width: 400px;
+    height: 200px;
+}
+#container-3>div{
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+}
+#container-3>:first-child{
+    background-color: pink;
+}
+#container-3>:last-child{
+    background-color: skyblue;
+}
+
+/* display:none */
+.div-4{
+    border: 3px solid black;
+    height: 100px;
+}
+#test4{
+    background-color: deeppink;
+    /* display: none; */
+    /* 요소는 존재하지만 화면에 보이지 않는다.
+    + 영역도 차지하지 않는다.*/
+
+    /* opacity: 0; 요소의 가시성을 관리하는 속성 */
+    visibility: hidden;
+}
