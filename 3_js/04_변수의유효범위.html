@@ -64,5 +64,28 @@
     <script>
         // console.log(a); 
     </script>
+
+    <h1>Hoisting</h1>
+    <script>
+        // var b; // var키워드 변수는 hoisting된다.
+        // function foo; // 함수는 호이스팅된다.
+        
+        console.log(b); // undefined
+        var b = "안녕";
+        foo();
+        // bar(); // 함수표현식은 호이스팅 불가
+
+        // 함수도 hoisting된다.
+        function foo(){
+            console.log("foo");
+        }
+
+        // 함수표현식으로 생성한 함수는
+        // 호이스팅되지 않는다.
+        var bar = function(){
+            console.log('bar');
+        };
+        bar();
+    </script>
 </body>
 </html>
