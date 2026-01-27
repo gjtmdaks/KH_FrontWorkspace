@@ -100,22 +100,35 @@
             체크 박스 선택 후 카테고리 선택을 누르면 하단 네모에 선택한 카테고리 출력.
         */
         function printCategory(){
-            var Arr = document.querySelectorAll("input");
+            var Arr = document.querySelectorAll("input[name=category]:checked");
+            area.innerHTML = "";
+            for(let i = 0; i < Arr.length; i++){
+                area.innerHTML += Arr[i].value+" ";
+            }
+
+            /* var Arr = document.querySelectorAll("input[name=category]");
             var result = [];
-            for (let index = 1; index < Arr.length; index++) {
+            for (let index = 0; index < Arr.length; index++) {
                 const element = Arr[index];
                 if(element.checked){
                     result += element.value + "\n";
                 }
             }
-            document.querySelector("#area").textContent=result;
+            document.querySelector("#area").textContent=result; */
         }
 
         /* 2번기능 (전체선택기능).
          전체선택 체크박스 선택시 모든 카테고리가 선택되며, 선택 해제서 모든 체크박스가 선택 해제. 
         */
         function selectAll(){
-            var Arr = document.querySelectorAll("input");
+            var checked = document.querySelector("#selectAll").checked;
+            var categorys = document.querySelectorAll("input[name=category]");
+            for(let i=0; i<categorys.length; i++){
+                categorys[i].checked = checked;
+            }
+
+
+            /* var Arr = document.querySelectorAll("input");
             if(document.querySelector("#selectAll").checked){
                 for (let index = 1; index < Arr.length; index++) {
                     const element = Arr[index];
@@ -126,7 +139,7 @@
                     const element = Arr[index];
                     element.checked = false;
                 }
-            }
+            } */
         }
 
         /* 3번기능 (카테고리 체크박스 선택시 전체선택 체크박스 제어 기능)
@@ -134,7 +147,13 @@
            하나라도 선택이 되어있지 않으면 전체선택 체크박스는 선택 해제
         */
         function checkCategory(checkbox){
-            var Arr = document.querySelectorAll("input");
+            var selectAll = document.querySelector("#selectAll");
+            var checkboxes = document.querySelectorAll("input[name=category]");
+            var checkedboxes = document.querySelectorAll("input[name=category]:checked");
+            selectAll.checked = checkboxes.length == checkedboxes.length;
+
+
+            /* var Arr = document.querySelectorAll("input");
             for (let index = 1; index < Arr.length; index++) {
                 const element = Arr[index];
                 if(!element.checked){
@@ -143,7 +162,7 @@
                 }else{
                     Arr[0].checked = true;
                 }
-            }
+            } */
         }
     </script>
 </body>
