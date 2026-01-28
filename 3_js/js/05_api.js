@@ -151,7 +151,7 @@ test8.onclick = function(){
          왼쪽 오른쪽 타입이 서로 다르다면 바로 결과를 반환하는 연산자
          즉, 두 값간의 자료형검사 또한 수행한다.
     */
-    console.log(3 == "3"); // true
+    console.log(3 == "3"); // true -> 자동형변환
     console.log(3 != "3"); // false
 
     console.log(3 === "3"); // false -> 자료형이 달라서

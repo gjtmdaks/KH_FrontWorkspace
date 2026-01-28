@@ -58,7 +58,18 @@
 		}
 
 		function printProduct(){
-			var bool = confirm(
+			var result = "상품명 : "+productName.value+"\n"
+						+"납품등급 : "+productLevel.value+"\n"
+						+"납품수량 : "+productAmount.value+"\n"
+						+"기타사항 : "+message.value+"\n";
+			
+			if(confirm(result+"입력하신 내용이 맞습니까?")){
+				var area = document.querySelector("#result");
+				area.innerHTML = result.replaceAll("\n", "<br>")
+			}
+
+
+			/* var bool = confirm(
 				"상품명 : " + document.querySelector("#productName").value+"\n"+
 				"납품등급 : " + document.querySelector("#productLevel").value+"\n"+
 				"납품수량 : " + document.querySelector("#productAmount").value+"\n"+
@@ -68,11 +79,12 @@
 			if(bool){
 				result.innerHTML = 
 				"<p style='white-space: pre-line; margin: 0px;'>"+
-				"상품명 : " + document.querySelector("#productName").value+"\n"+
-				"납품등급 : " + document.querySelector("#productLevel").value+"\n"+
-				"납품수량 : " + document.querySelector("#productAmount").value+"\n"+
-				"기타사항 : " + document.querySelector("#message").value+"\n</p>";
-			}
+					"상품명 : " + document.querySelector("#productName").value+"\n"+
+					"납품등급 : " + document.querySelector("#productLevel").value+"\n"+
+					"납품수량 : " + document.querySelector("#productAmount").value+"\n"+
+					"기타사항 : " + document.querySelector("#message").value+
+				"</p>";
+			} */
 		}
   </script>
 </body>

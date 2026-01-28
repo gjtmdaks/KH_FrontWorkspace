@@ -32,11 +32,23 @@
 	<div id="area"></div>
 	<script type="text/javascript">
 		function printValue() {
-			area.innerHTML = 
+			var customer = document.querySelector("input[placeholder='구매자의 이름을 입력하세요.']");
+			var pname = document.querySelector("#pname");
+			var price = document.querySelector("input[name=price]");
+
+			// 내가 선택한 요소의 입력값을 얻어오려면? value
+			var result = "구입자 : "+customer.value+"님<br>"
+						+"구입상품 : "+pname.value+"<br>"
+						+"구매가격 : "+price.value+"만원";
+			area.innerHTML = result;
+
+
+			/* area.innerHTML = 
 				"<p style='white-space: pre-line; margin: 0px;'>"+
-				"구입자 : " + document.querySelector("input:nth-of-type(1)").value+"님\n"+
-				"구입상품 : " + document.querySelector("input:nth-of-type(2)").value+"\n"+
-				"구매가격 : " + document.querySelector("input:nth-of-type(3)").value+"만원\n</p>";
+					"구입자 : " + document.querySelector("input:nth-of-type(1)").value+"님\n"+
+					"구입상품 : " + document.querySelector("input:nth-of-type(2)").value+"\n"+
+					"구매가격 : " + document.querySelector("input:nth-of-type(3)").value+"만원"+
+				"</p>"; */
 		}
 	</script>
 </body>

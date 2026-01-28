@@ -39,8 +39,8 @@ innerT.onclick = function(){
         innerText/textContent : content영역 안의 "문자"요소만을 가져오는 속성
     */
     var str = "<h1>배고파요..</h1>"
-    wrapper.innerText = str; // setter방식
     wrapper.textContent = str;
+    wrapper.innerText = str; // setter방식
     console.log(wrapper.innerText); // getter방식
 };
 
