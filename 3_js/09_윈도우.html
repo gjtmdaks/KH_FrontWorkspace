@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #clock {
+            font-size: 3em;
+            text-shadow: 3px 3px 7px #000;
+        }
+
+        #countdown {
+            border: 3px solid #000;
+            font-size: 30em;
+            padding: 10px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Window</h1>
+    <h2>Method</h2>
+    <input type="button" value="open" onclick="test1();">
+    <input type="button" value="popup 닫기" onclick="test2();">
+    <input type="button" value="setTimeout" onclick="test3();">
+    <input type="button" value="실습문제" onclick="test4();">
+    <input type="button" value="clearTimeout" onclick="test5();">
+    <input type="button" value="setInterval" onclick="test6();">
+    <input type="button" value="실습문제" onclick="test7();">
+    <hr>
+    <div id="clock"></div>
+    <div id="countdown"></div>
+
+    <h2>BOM</h2>
+    <h3>Browser Object Model</h3>
+    <input type="button" value="navigator" onclick="test8();">
+    <input type="button" value="location" onclick="test9();">
+    <input type="button" value="history" onclick="test10();">
+    <input type="button" value="screen" onclick="test11();">
+
+    <h2>DOM</h2>
+    <input type="button" value="createElement" onclick="test12();">
+    <input type="button" value="createImg" onclick="test13();">
+    <input type="button" value="deleteNode" onclick="deleteNode(this);">
+    
+    <div class="img-wrapper"></div>
+    <div class="result"></div>
+
+    <script src="./js/09_window.js"></script>
+</body>
+</html>
