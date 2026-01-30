@@ -59,6 +59,29 @@
             2) 등록 완료후 작성한 내용을 비워줄것
         */
         function insertBoard(){
+            var title = document.querySelector("input[name=title]");
+            var content = document.querySelector("textarea[name=content]");
+
+            if(!(title.value && content.value)){
+                alert("내용을 작성하세요");
+                return;
+            }
+
+            var li = document.createElement("li");
+            var h5 = document.createElement("h5");
+            h5.innerText = title.value;
+            var p = document.createElement("p");
+            p.innerText = content.value;
+
+            li.append(h5, p);
+
+            boardList.appendChild(li);
+
+            title.value = "";
+            content.value = "";
+
+
+            /*
             var li = document.createElement("li");
             var h5 = document.createElement("h5");
             var p = document.createElement("p");
@@ -83,6 +106,7 @@
             }
             document.querySelector("header>input").value = "";
             document.querySelector("section>textarea").value = "";
+            */
         }
         
         /* 
@@ -90,15 +114,30 @@
             검색내용을 비워둔후 재검색 눌렀을때는 전체 게시글목록이 나와야함. (includes())
         */
         function searchTitle(){
+            var list = document.querySelectorAll("#boardList>li");
+            var search = document.querySelector("input[name=search]").value;
+
+            for(var li of list){
+                var textContent = li.querySelector("h5").innerText;
+
+                li.style.display = "block";
+                
+                if(!textContent.includes(search)){
+                    li.style.display = "none";
+                }
+            }
+            
+            /*
             var key = document.querySelector("[name=search]").value;
             var liArr = document.querySelectorAll("#boardList>li");
 
             for(var li of liArr){
-                if((li.querySelector("h5").textContent).includes(key) || (li.querySelector("p").textContent).includes(key)){
+                if((li.querySelector("h5").textContent).includes(key)){
                     li.style.display="block";
                 }
                 else li.style.display="none";
             }
+            */
         }
     
     </script>
