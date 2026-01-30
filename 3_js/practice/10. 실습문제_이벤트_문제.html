@@ -35,20 +35,33 @@
         <button type="button" data-url='https://www.w3schools.com'>와삼</button>
     </div>
     <script>
+        document.querySelector("#btn-generate").onclick = function(e){
+            var btns = document.querySelectorAll(".btn-wrapper>button");
+            
+            for(var button of btns){
+                var btn = document.createElement("button");
+                btn.innerText = button.innerText;
+                btn.dataset.url = button.dataset.url;
+
+                btn.onclick = function(){
+                    location.assign(this.dataset.url);
+                }
+
+                document.querySelector(".btn-wrapper").appendChild(btn);
+            }
+        }
+
+        /*
         document.querySelector("#btn-generate").onclick = function(){
             var bArr = document.querySelectorAll(".btn-wrapper>button");
 
-            var arr = [];
-
-            var x=1;
             for(var btn of bArr){
-                arr.push({"btn":btn.textContent, "url":btn.dataset.url});
-
                 btn.addEventListener('click', function(){
                         location.assign(this.dataset.url);
                     })
             }
         }
+        */
     </script>
 </body>
 </html>
