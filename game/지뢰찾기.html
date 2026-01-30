@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>지뢰찾기</title>
+    <style>
+        td{
+            border : 1px solid black;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            background: #444;
+            font-weight: bold;
+        }
+        td.opened{
+            background: white;
+        }
+        .sec{
+            background: #444;
+            margin-bottom: 10px;
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+            margin-left: 5px;
+            text-align: center;
+            padding: 17px;
+        }
+        .inputSet input{
+
+            border: 2px solid black;
+            margin-bottom: 10px;
+            background: #444;
+            color: white;
+            font-weight: bold;
+        }
+        #exec{
+            margin-bottom: 10px;
+            font-weight: bold;
+            background: #444;
+            color: white;
+        }
+        #won{
+            margin-top: 10px;
+            padding: 30px;
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            background: #444;
+        }
+        .exclamFlag{
+            font-weight: bold;
+            background: green;
+        }
+        .questionFlag{
+            font-weight: bold;
+            background: green;
+        }
+        #gameBackGround{
+            background: gray;
+        }
+        #instruction{
+            background: #444;
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            margin-left: 5px;
+            text-align: center;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id = 'gameBackGround'>
+    <div id = 'instruction'>
+        가로 , 세로 , 지뢰 숫자를 입력하시오.
+    </div>
+    <div class = "inputSet">
+        <input id="hor" type = "number" placeholder="가로" >
+        <input id="ver" type = "number" placeholder="세로" >
+        <input id="mine" type = "number" placeholder="지뢰">
+    </div>
+
+    <button id = "exec">지뢰판 만들기</button>
+    <div></div>
+    <div class = "sec">
+        <span id = "secCount">0</span>초
+    </div>
+
+        <table id="table">
+            <tbody>
+
+            </tbody>
+        </table>
+
+
+    <div id = 'won'></div>
+</div>
+    <script>document.querySelector('#exec').addEventListener('click', function () {
+    var stopFlag = 0;
+    var hor = parseInt(document.querySelector('#hor').value);
+    var ver = parseInt(document.querySelector('#ver').value);
+    var mine = parseInt(document.querySelector('#mine').value);
+    var tbody = document.querySelector('#table tbody');
+    var dataset = [];
+    var dx = [0, 0, 1, 1, 1, -1, -1, -1];
+    var dy = [1, -1, 0, 1, -1, 0, 1, -1];
+    var winningCount = 0;
+    var won = document.querySelector('#won');
+    var secCount = document.querySelector('#secCount');
+
+    counting();
+    function counting(){
+
+        var count = 0;
+        var everySec = setInterval(function(){
+            count+= 0.2;
+            count = Math.floor(count*10)/10;
+            secCount.textContent = count;
+            if(stopFlag == 1){
+
+                clearInterval(everySec);
+                count = 0;
+                secCount.textContent = 0;
+            }
+        }, 200);
+
+
+    }
+    won.textContent = '';
+
+    tbody.innerHTML = ''
+    console.log(hor, ver, mine);
+
+    function revealEmpty(y, x) {
+        console.log(winningCount);
+        for (var i = 0; i < 8; i++) {
+            var newX = x + dx[i];
+            var newY = y + dy[i];
+            if (newX < 0 || newX >= hor || newY < 0 || newY >= ver)
+                continue;
+            if (tbody.rows[newY].cells[newX].className != 'opened' && dataset[newY][newX] != 'X') {
+                winningCount++;
+                tbody.rows[newY].cells[newX].classList.add('opened');
+                var counter = 0;
+                for (var j = 0; j < 8; j++) {
+                    var tmpX = newX + dx[j];
+                    var tmpY = newY + dy[j];
+                    if (tmpX < 0 || tmpX >= hor || tmpY < 0 || tmpY >= ver)
+                        continue;
+                    if (dataset[tmpY][tmpX] == 'X')
+                        counter++;
+                }
+                tbody.rows[newY].cells[newX].textContent = counter;
+                dataset[newY][newX] = counter;
+
+                if (counter == 0) {
+                    tbody.rows[newY].cells[newX].textContent = '';
+                    dataset[newY][newX] = '';
+                    revealEmpty(newY, newX);
+                }
+            }
+        }
+    }
+
+
+
+    function boomAction(y, x, status) {
+        setTimeout(function(){
+            for (var i = 0; i < 8; i++) {
+                var newX = x + dx[i];
+                var newY = y + dy[i];
+                if (newX < 0 || newX >= hor || newY < 0 || newY >= ver)
+                    continue;
+                if (tbody.rows[newY].cells[newX].textContent != status) {
+                    tbody.rows[newY].cells[newX].classList.add('opened');
+                    tbody.rows[newY].cells[newX].textContent = status;
+                    boomAction(newY, newX , status);
+                }
+            }
+        } , 100);
+    }
+    function leftClickEvent(td){
+
+        td.addEventListener('click', function (e) {
+            if(stopFlag)
+                return;
+            console.log(winningCount);
+            e.preventDefault();
+            var parentTr = e.currentTarget.parentNode;
+            var parentTbody = e.currentTarget.parentNode.parentNode;
+            var colIndex = Array.prototype.indexOf.call(parentTr.children, e.currentTarget);
+            var rowIndex = Array.prototype.indexOf.call(parentTbody.children, parentTr);
+            e.currentTarget.classList.add('opened');
+            console.log(parentTr, parentTbody, "col = " + colIndex + "row = " + rowIndex);
+            if (dataset[rowIndex][colIndex] == 'X') { //폭탄을 밟을경우
+                e.currentTarget.textContent = '펑';
+                boomAction(rowIndex, colIndex , '펑');
+                stopFlag = 1;
+
+                won.textContent = "패배하였습니다!";
+                document.querySelector('#won');
+            } else { //빈칸일경우
+                var counter = 0;
+
+                for (var i = 0; i < 8; i++) {
+                    var x = colIndex + dx[i];
+                    var y = rowIndex + dy[i];
+                    if (x < 0 || x >= hor || y < 0 || y >= ver)
+                        continue;
+                    if (dataset[y][x] == 'X')
+                        counter++;
+                }
+                if (counter != 0) // 주변에 폭탄이 있을경우
+                {console.log(winningCount);
+                    winningCount++;
+                    e.currentTarget.textContent = counter;
+                }
+                else {
+                    revealEmpty(rowIndex, colIndex);//주변 8개 동시 오픈
+                }
+            }
+            if(winningCount >= hor * ver - mine-2){
+
+                boomAction(rowIndex , colIndex , '승');
+                won.textContent = "승리하셨습니다!";
+                document.querySelector('#won');
+                stopFlag = 1;
+            }
+        });
+    }
+    function makeMineField() {
+        for (var i = 0; i < ver; i++) {
+            var tr = document.createElement('tr');
+            var arr = [];
+            dataset.push(arr);
+            for (var j = 0; j < hor; j++) {
+                arr[j] = '';
+                var td = document.createElement('td');
+
+                ////좌클릭이벤트////////////////////////////////////////////////
+                ////좌클릭이벤트////////////////////////////////////////////////
+                leftClickEvent(td);
+                ///////////////////////////////////////
+                ///////////////////////////////////////
+                ///////////////////////////////////////
+                ////////우클릭 이벤트
+                ////////우클릭 이벤트
+                td.addEventListener('contextmenu', function (e) {
+                    e.preventDefault(); //기존우클릭 무효
+                    var parentTr = e.currentTarget.parentNode;
+                    var parentTbody = e.currentTarget.parentNode.parentNode;
+                    var colIndex = Array.prototype.indexOf.call(parentTr.children, e.currentTarget);
+                    var rowIndex = Array.prototype.indexOf.call(parentTbody.children, parentTr);
+                    //반복문 안에서 함수를 사용하는데 매게변수를 공유하며 값이 계속 바뀌면 ? 클로저 문제 발생가능.
+                    console.log(parentTr, parentTbody, "col = " + colIndex + "row = " + rowIndex);
+                    if (e.currentTarget.textContent == '' || e.currentTarget.textContent == 'X') {
+
+                        e.currentTarget.classList.add('exclamFlag');
+                        e.currentTarget.textContent = '!';
+                    } else if (e.currentTarget.textContent == '!') {
+                        e.currentTarget.classList.remove('exclamFlag');
+                        e.currentTarget.classList.add('questionFlag');
+                        e.currentTarget.textContent = '?';
+                    } else if (e.currentTarget.textContent == '?') {
+                        e.currentTarget.classList.remove('questionFlag');
+                        e.currentTarget.textContent = dataset[rowIndex][colIndex];
+                    }
+
+                });
+                /////////////////
+                /////////////////
+                tr.appendChild(td);
+                td.textContent = '';
+            }
+            tbody.appendChild(tr);
+        }
+        console.log(dataset);
+    }
+
+
+    function makeRandomMine() {//지뢰 랜덤 심기
+        var candidate = Array(hor * ver)
+            .fill()
+            .map(function (factor, index) {
+                return index + 1;
+            });
+        var shuffel = [];
+        var iterator = mine;
+        while (candidate.length > 0 && iterator > 0) {
+            iterator--;
+            shuffel.push(
+                candidate.splice(Math.floor(Math.random() * candidate.length), 1)[0]
+                //랜덤으로 섞고 첫번째값 넣고 splice로 하나지움.
+            )
+        }
+        console.log(shuffel);
+
+        //지뢰 심기 "X"
+        for (var i = 0; i < shuffel.length; i++) {
+            var tmpCord = shuffel[i] - 1;
+            var y = Math.floor(tmpCord / ver);
+            var x = tmpCord % hor;
+            //tbody.children[y].children[x].textContent = 'X';
+            dataset[y][x] = 'X';
+        }
+        console.log(dataset);
+    }
+
+    function rightClickEvent(index) {
+        console.log("오른쪽 클릭" + index);
+    }
+
+
+    makeMineField();
+    makeRandomMine();
+    // rightClickEvent();
+
+});</script>
+</body>
+</html>
