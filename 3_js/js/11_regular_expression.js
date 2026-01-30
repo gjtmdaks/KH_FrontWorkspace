@@ -141,29 +141,165 @@ function test6(){
 }
 
 function test7(){
-    
+    /* 
+        1. 사용자로 숫자로 시작되지 않는 id를 검사.(prompt)
+        2. 숫자4자리인 비밀번호 여부 검사.(prompt)
+
+        유효하지 않은 경우, alert창 띄우기.
+    */
+    var id = prompt("id 입력");
+    if(/^[0-9]/.test(id)){
+        alert("잘못작성");
+        return;
+    }
+    var pwd = prompt("비번 입력");
+    if(!/^[0-9]{4}$/.test(pwd)){
+        alert("잘못작성");
+        return;
+    }
+    /* 
+    var id = prompt("아이디를 입력하시오(숫자로 시작할 것)");
+    var pwd = prompt("비밀번호를 입력하시오(4자리 숫자)");
+
+    var idck = /^[0-9]/img;
+    var pwck = /^[0-9][0-9][0-9][0-9]$/img;
+
+    if(!(idck.test(id) && pwck.test(pwd))){
+        alert("유효하지 않음");
+    }
+    */
 }
 
 function test8(){
-    
+    /* 
+        문자클래스
+
+        \d : decimal 숫자 == [0-9]
+        \w : word 영문자, 숫자, _ == [a-zA-z0-9]
+        \s : space 공백문자, 탭, 개행문자 == [ \t\n]
+
+        \D : 숫자가 이닌 문자 == [^0-9]
+        \W : 영문자, 숫자, _가 아닌 문자 == [^a-zA-z0-9]
+        \S : 공백, 탭, 개행문자가 아닌 문자 == [^ \t\n]
+    */
+    var s = "A1 B2 c3 d_4 e:5' ` ffGG6767--__--!\"@#$%^&*()     가\n나\n다\n";
+
+    area.innerHTML = 
+        // s.replace(/\d/g, mark);
+        // s.replace(/\w/g, mark);
+        // s.replace(/\s/g, mark);
+
+        // s.replace(/[^0-9]/g, mark);
+        // s.replace(/\D/g, mark);
+
+        // s.replace(/[^ \t\n]/g, mark);
+
+        s.replace(/[!\"@#$%^&*()]/g, mark);
 }
 
+/* 
+    () 그룹핑
+     | or선택자
+*/
 function test9(){
-    
+    var s = "월요일에는 월요병, 화요일은 화가 부글부글, "
+          + "수요일은 술이 확 땡긴다. 목요일이 목이 컥 막히고, "
+          + "금요일은 금방 올거 같지 않다.";
+
+    area.innerHTML = 
+        // s.replace(/(수요일|목요일|금요일)/g, mark);
+        // s.replace(/(수|목|금)요일/g, mark);
+        s.replace(/[수목금]요일/g, mark);
 }
 
+/* 
+    escaping 문자
+     - 메타문자를 실제문자값으로 사용하려면, \(역슬래시)를 통해 escaping
+       처리 한다.
+     - []안에서는 escaping이 필요 없다. (단, 시작 ^은 부정의 의미를 가짐.)
+*/
 function test10(){
-    
+    var s = "$12$ \\-\\ $25$";
+
+    area.innerHTML = 
+        // s.replace(/$/g, mark); // $를 그냥 사용하면 끝문자를 의미
+        // s.replace(/\$/g, mark);
+        // s.replace(/^\$/g, mark);
+        s.replace(/\$$/g, mark);
 }
 
+/* 
+    수량자( * + ? )
+
+    a* : a가 0개이상인 패턴
+    a+ : a가 1개이상인 패턴
+    a? : a가 0 | 1개
+*/
 function test11(){
-    
+    var s = "aaabc abc bc";
+
+    area.innerHTML = 
+        // s.replace(/a*b/g, mark); // k.*h; -> kh ~ k aaaaabbbbb h
+        // s.replace(/a+b/g, mark);
+        // s.replace(/a?b/g, mark);
+
+        s.replace(/a{0,}b/g, mark);
 }
 
+/* 
+    수량표현
+    a{5} : a가 5개
+    a{2,5} : a가 2개이상 5개이하
+    a{3,} : a가 3개 이상
+
+    * -> {0,} 0개 이상
+    + -> {1,} 1개 이상
+    ? -> {0,1} 0 | 1
+*/
 function test12(){
+    var s = "aa aba abba abbba";
+
+    area.innerHTML = 
+        // s.replace(/ab{3}a/g, mark);
+        // s.replace(/ab{1,2}a/g, mark);
+        s.replace(/ab{2,}a/g, mark);
     
+    //숫자로시작하고, 영문자3글자이상 나오고, .마침표로 끝나는 문자열을 검사하는 정규식 작성
+    // true : 1abc안녕하세요. 3xyzkkk. 1ABC.
+    // false : 100 1cbㅋㅋㅋ. 아아아아.
+    // var re = /^[0-9][a-zA-Z]{3,}.{0,}[.]$/;
+    var re = /^\d[A-z]{3,}.*\.$/;
+    ["1abc안녕하세요.", "3xyzkkk.", "1ABC."].forEach(function(s){
+        console.log(re.test(s)); // true
+    });
+
+    ["100", "1cbㅋㅋㅋ.", "아아아아.", "1가나다abc.", "123abc다나가."].forEach(function(s){
+        console.log(re.test(s)); // false
+    });
 }
 
+/* 
+    Look Around
+     - 탐색문법
+
+    1. look ahead(전방탐색)
+     - xxx(?=(re)) | xxx(?!(re))
+     - xxx다음 re과 일치하는 패턴을 검색
+     - 최종 반환되는 패턴은 xxx만 반환
+
+    2. look behind(후방탐색)
+     - (?<=(re))xxx : xxx앞에 re과 일치하는 요소가 있다면 xxx반환
+     - (?<!(re))xxx : xxx앞에 re과 일치하지 않는 요소가 있다면 xxx반환
+*/
 function test13(){
-    
+    var s = "hello world hello tom hello Jane";
+    area.innerHTML = 
+        // s.replace(/hello(?=( world))/g, mark);
+        // s.replace(/hello(?=( Jane))/g, mark);
+        s.replace(/hello(?!( Jane))/g, mark);
+
+    var s2 = "hello world lotte world t world";
+    area.innerHTML = 
+        // s2.replace(/(?<=(hello ))world/g, mark);
+        s2.replace(/(?<!(hello ))world/g, mark);
 }
