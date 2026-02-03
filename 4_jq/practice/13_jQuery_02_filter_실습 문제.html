@@ -13,11 +13,16 @@
     <script>
         //체크한 체크박스의 value값들을 콘솔창에 출력
         function checkBtn(){
-            var checkedboxs = $("input[name=check]").filter(":checked");
-            $.each(checkedboxs, function(i,v){
-                var result = v.value;
-                console.log(result);
+            var $check = $("input").filter(":checked");
+            $check.each(function(i, input){
+                console.log($(input).val());
             })
+
+            // var checkedboxs = $("input[name=check]").filter(":checked");
+            // $.each(checkedboxs, function(i,v){
+            //     var result = v.value;
+            //     console.log(result);
+            // })
         }
     </script>
         
@@ -34,8 +39,15 @@
     <script>
         //선택한 select박스의 value값을 콘솔창에 출력
         function selectBtn(){
-            var selectedboxs = $("select>option").filter("selected='selected'");
-            console.log(selectedboxs);
+            // $("select").val();
+            var $options = $("option").filter(":selected");
+            console.log($options.val());
+
+            // var selectedboxs = $("select>option").filter(":selected");
+            // $.each(selectedboxs, function(i,v){
+            //     var result = v.value;
+            //     console.log(result);
+            // })
         }
     </script>
         
