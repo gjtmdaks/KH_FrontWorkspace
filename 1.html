@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>KH게시판 - 실습문제</h1>
+
+    <hr>
+
+    <h3>메뉴</h3>
+    <p>학습내용 클릭시</p>
+
+    <ol>
+        <li>Home</li>
+        <li><b>KH게시판</b></li>
+        <li>학습내용
+            <ol type="I" start="7" reversed>
+                <li><a href="./1_html/8_하이퍼링크관련태그.html">하이퍼링크관련태그</a></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ol>
+        </li>
+    </ol>
+
+    <hr>
+
+    <h1>KH게시판</h1>
+    <p>4번 게시글</p>
+    <p>등록하기</p>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>번호</th>
+                <th>번호</th>
+                <th>번호</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><b>4</b></td>
+                <td><b><a href="#">아,,html 재미없다</a></b></td>
+                <td><b></b></td>
+                <td><b></b></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <th colspan="4">
+                <a href="#mark">
+                    <button>등록</button>
+                </a>
+            </th>
+        </tfoot>
+    </table>
+
+    <br><br><br><br>
+    <hr>
+    <br><br><br><br>
+
+    <h2 id="#">4번 게시글</h2>
+    <p>행병합,열병합</p>
+    <table>
+        <tr>
+            <th>번호</th>
+            <td colspan="3">4</td>
+        </tr>
+        <tr>
+            <th>제목</th>
+            <td colspan="3">4</td>
+        </tr>
+        <tr>
+            <th>작성자</th>
+            <td>임세윤</td>
+            <th>조회수</th>
+            <td>1000</td>
+        </tr>
+        <tr>
+            <th rowspan="2">내용</th>
+            <td rowspan="2" colspan="2">각종 내용</td>
+            <th>첨부 이미지</th>
+        </tr>
+        <tr>
+            <img src="" alt="">
+        </tr>
+    </table>
+
+    <br><br><br><br>
+    <hr>
+    <br><br><br><br>
+
+    <h2 id="#mark">게시글 등록</h2>
+    <p>제목,내용</p>
+
+    <form action="insert" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>게시글 등록</legend>
+            <fieldset>
+                <legend>제목</legend>
+                <input type="text">
+                <br>
+            </fieldset>
+            <fieldset>
+                <legend>내용</legend>
+                <textarea name="content" id=""></textarea>
+                <br>
+            </fieldset>
+            <fieldset>
+                <legend>첨부파일</legend>
+                <input type="file">
+            </fieldset>
+            <br>
+            <input type="submit">
+        </fieldset>
+    </form>
+
+    <p>&copy; 2024 KH</p>
+</body>
+</html>

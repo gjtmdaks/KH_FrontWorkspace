@@ -1,0 +1,46 @@
+table{
+    width: 100%;
+}
+
+thead,tfoot{
+    background-color: #FFA07A;
+    color: white;
+}
+
+tbody:not(fieldset tbody){
+    background-color: #FFFFE0;
+}
+
+fieldset table th{
+    width: 5%;
+}
+#title{
+    width: 500px;
+}
+#content{
+    width: 500px;
+    height: 200px;
+}
+
+button{
+    width: 100%;
+}
+
+#num{
+    width: 4%;
+}
+#tt{
+    width: 50%;
+}
+#btn{
+    width: 6%;
+}
+#name{
+    width: 12%;
+}
+#date{
+    width: 12%;
+}
+#view{
+    width: 5%;
+}

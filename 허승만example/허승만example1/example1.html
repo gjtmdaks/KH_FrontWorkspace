@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./example1.css">
+</head>
+<body>
+    <h1>포트폴리오 문제</h1>
+    <p>설명 : "*" 이 붙은 문구 및 현재 작성된 이 문구는 화면구현시 구현을 안해도됩니다. 설명을 위해 작성한 구문입니다.</p>
+    <br>
+    <p>* 하단의 화면처럼 공지사항 작성하기 폼을 작성하시오.(form의 action속성값은 "insert.no"부여, method속성값은 "post"부여)</p>
+
+    <form action="insert.no" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>공지사항 작성하기</legend>
+            <table>
+                <tr>
+                    <th>제목</th>
+                    <td><input type="text" name="title" id="title" placeholder="제목을 입력하시오." required></td>
+                    <td>* name속성값은 "title"부여, 필수입력사항 속성부여</td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td><textarea name="content" id="content" placeholder="내용을 입력하시오." required ></textarea></td>
+                    <td>* name속성값은 "content"부여, 필수입력사항 속성부여</td>
+                </tr>
+                <tr>
+                    <th>첨부파일</th>
+                    <td><input type="file" name="uploadFile"></td>
+                    <td>* name속성값은 "uploadFile"부여</td>
+                </tr>
+                <tr>
+                    <th colspan="2"><input type="submit" value="작성하기"></th>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+    <hr>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th colspan="2">제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+                <th>조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="num">9</td>
+                <td id="tt">공지사항 제목 9</td>
+                <td id="btn"><a href="#num9"><button>바로가기</button></a></td>
+                <td id="name">user01</td>
+                <td id="date">2021-03-29</td>
+                <td id="view">34</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>공지사항 제목 6</td>
+                <td><a href="#num6"><button>바로가기</button></a></td>
+                <td>answ445</td>
+                <td>2021-03-12</td>
+                <td>67</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>공지사항 제목 3</td>
+                <td><a href="#num3"><button>바로가기</button></a></td>
+                <td>testg12</td>
+                <td>2021-03-01</td>
+                <td>98</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>공지사항 제목 2</td>
+                <td><a href="#num2"><button>바로가기</button></a></td>
+                <td>palwe3</td>
+                <td>2021-01-02</td>
+                <td>85</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>공지사항 제목 1</td>
+                <td><a href="#num9"><button>바로가기</button></a></td>
+                <td>xml23</td>
+                <td>2020-12-24</td>
+                <td>124</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="4">전체공지사항 갯수</th>
+                <th colspan="2">5개</th>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
