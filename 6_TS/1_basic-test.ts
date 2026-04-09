@@ -4,7 +4,17 @@ animal = ['panda','cat','wombat','frog','hamster'];
 human = {name : 'mkm', age : 25, height: 180.5, married : false}
 
 // Q2. zoo의 타입주석을 작성하시오
-let zoo:{animals:string[], total:number, isClosed:boolean, location:string, masterInfo:{name:string, age:number, height:number}};
+let zoo:{
+    animals:string[],
+    total:number,
+    isClosed:boolean,
+    location:string,
+    masterInfo:{
+        name:string,
+        age:number,
+        height:number
+    }
+};
 zoo = {
     animals : ['panda','cat','wombat','frog','hamster'],
     total   : 120,
@@ -29,7 +39,8 @@ zoo = {
     1번 인덱스에는 문자열값만 와야합니다.
     2번 인덱스부터 새로운 값이 추가될 경우 반드시 에러를 발생시켜야 합니다.
 */
-let response: [200 , "response success"] | [404, "Page not found"] | [500, "server error"];
+// let response: [200 , "response success"] | [404, "Page not found"] | [500, "server error"];
+let response: readonly[number,string];
 
 // Q4
 /*
@@ -76,3 +87,5 @@ let test3 : unknown = undefined; // ok
 test3 = 1234; // ok
 test3 = true; // ok
 // test1 = test3; // compile error
+
+export default test1;
