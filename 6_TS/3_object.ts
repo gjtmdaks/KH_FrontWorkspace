@@ -104,8 +104,8 @@ type str = string;
 type bool = boolean;
 
 /*
-    5. 
-
+    5. 인덱스 시그니쳐
+     - 객체의 속성명에 대하여 명확히 인지하지 못하는 경우 사용하는 문법
      - 객체의 속성명과 그 타입을"일반화" 허여 표현한다.
     const responseData = {
     "user01" : {
@@ -117,14 +117,31 @@ type bool = boolean;
         name : 'kh 수달',
         age  : 5,
         interest : ['잠수'],
-    }
+    }}
 */
+type User = {
+    name : string;
+    age : number;
+    interest : string[];
+}
 
+type UserList = {
+    [id:string] : User;
+}
 
-
-
-
-
+const responseData:UserList = {
+    "mkm" : {
+        name:'kh호랑이',
+        age : 50,
+        interest :['낮잠']
+    },
+    "mkm2" : { 
+        name:'kh호랑이',
+        age : 50,
+        interest :['낮잠']
+    }
+}
+// 인덱스 시그니쳐 사용시 주의점
 const responseData2:ClassInfo = {
     name : 'kh academy' ,
     classRoom : 'C CLASS',
