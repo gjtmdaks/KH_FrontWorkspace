@@ -4,21 +4,45 @@ import ParentComponent from './01_react_basic/02.PropsAndState' // export defaul
 import ArrayDataBinding from './01_react_basic/03.ArrayBinding'
 import UserInfoContainer from './prectice/1.PropsPrectice'
 import BoardContainer from './prectice/2.BoardContainer'
+import ObjectDataBinding from './01_react_basic/04.ObjectBinding'
+import ModuleCSS from './01_react_basic/05.ModuleCss'
+import UseEffectHook from './02_react_advenced/01.UseEffectHook'
+import OptimizationHook from './02_react_advenced/02.OptimizationHook'
+import AutoSaveEditor from './prectice/3.useEffect'
+import OptimizationPractice from './prectice/4.OptimizationPractice'
+// import CustomHook from './02_react_advenced/03.CustomHook'
 
 function App() {
 
   return (
     <>
-      <Component/>
-        <hr/><hr/>
-      <ParentComponent/>
-        <hr/><hr/>
-      <ArrayDataBinding/>
-        <hr/><hr/>
+      {/* 7-1-1<br/>
+      <Component/> */}
+      {/* 7-1-2<br/>
+      <ParentComponent/> */}
+      {/* 7-1-3<br/>
+      <ArrayDataBinding/> */}
 
-      <UserInfoContainer/>
-        <hr/><hr/>
-      <BoardContainer/>
+      {/* 실습문제 1.<br/>
+      <UserInfoContainer/> */}
+      {/* 실습문제 2.<br/>
+      <BoardContainer/> */}
+
+      {/* 7-1-4.<br/>
+      <ObjectDataBinding/> */}
+      {/* 7-1-5.<br/>
+      <ModuleCSS/> */}
+      {/* 7-2-1.<br/>
+      <UseEffectHook/> */}
+      {/* 7-2-2.<br/>
+      <OptimizationHook/> */}
+      {/* 7-2-3.<br/>
+      <CustomHook/> */}
+
+      {/* 실습문제 3.<br/>
+      <AutoSaveEditor/> */}
+      실습문제 4.<br/>
+      <OptimizationPractice/>
     </>
   )
 }

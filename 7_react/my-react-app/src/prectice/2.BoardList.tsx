@@ -16,13 +16,24 @@ import { boardList } from './2.boardMockUp';
 function BoardList({list, setList}: {list: typeof boardList, setList: React.Dispatch<React.SetStateAction<typeof boardList>>}) {
   // #3. 정렬 함수 구현
   // - 작성일 기준 오름차순/내림차순 해주는 함수를 구현하세요.
-  const sortByDateAsc;
-  const sortByDateDesc;
+  const sortByDateAsc = () => {
+    const sortedList = [...list].sort(
+      (a, b) => new Date(a.boardDate).getTime() - new Date(b.boardDate).getTime()
+    );
+    setList(sortedList);
+  };
+  const sortByDateDesc = () => {
+    const sortedList = [...list].sort(
+      (a, b) => new Date(b.boardDate).getTime() - new Date(a.boardDate).getTime()
+    );
+    setList(sortedList);
+  };
 
   // #2. 삭제함수 구현
   //  - 게시글 번호를 인자로 받아 게시글을 삭제하는 함수를 구현하세요.
-  const boardDelete = () => {
-    
+  const boardDelete = (boardNo: number) => {
+    const updatedList = list.filter(board => board.boardNo !== boardNo);
+    setList(updatedList);
   };
   
   return (
@@ -56,7 +67,7 @@ function BoardList({list, setList}: {list: typeof boardList, setList: React.Disp
                   <td>{board.boardTitle}</td>
                   <td>{board.boardWriter}</td>
                   <td>{board.boardDate}</td>
-                  <td><button onClick={boardDelete}>삭제</button></td>
+                  <td><button onClick={() => boardDelete(board.boardNo)}>삭제</button></td>
                 </tr>
               ))
             }

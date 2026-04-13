@@ -14,7 +14,7 @@
   boardMockUp의 배열데이터를 export하여 자식 컴포넌트들에 list와 setList를 전달하시오.
 */
 import { useState } from 'react';
-import { boardList } from './2.boardMockUp';  
+import { boardList } from './2.boardMockUp';
 import BoardList from './2.BoardList';
 import BoardRegister from './2.BoardInsert';
 import BoardSearch from './2.BoardSearch';
@@ -25,7 +25,7 @@ function BoardContainer(){
   // - BoardList, BoardRegister, BoardSearch의매개변수를확인하여필요한 state를
   //   선언하세요.
   // - 사용할데이터의 초기값은 boardMockUp의 boardList를 사용하세요.
-  let [list, setList] = useState(boardList)
+  const [list, setList] = useState(boardList)
 
   // #2. props구현
   //  - props문법을 통해 컴포넌트들에 필요한 데이터를 전달하세요.
@@ -33,8 +33,8 @@ function BoardContainer(){
   return(
     <div>
       <BoardList list={list} setList={setList}/>
-      <BoardRegister />
-      <BoardSearch />
+      <BoardRegister list={list} setList={setList}/>
+      <BoardSearch list={list}/>
     </div>
   )
 }

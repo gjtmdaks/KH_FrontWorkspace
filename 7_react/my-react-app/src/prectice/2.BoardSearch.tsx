@@ -15,14 +15,14 @@ import { boardList } from './2.boardMockUp';
 
 function BoardSearch({list}: {list: typeof boardList}) {
 
-
   // - 검색어가 있으면 검색어를 포함한 게시글만 필터링하여 검색결과에 표시하세요.
   // - 검색어가 없으면 검색결과 없음을 표시하며 이 때 조건부 렌더링을 사용하세요.
 
   // #1. 검색어 관리
   //  - useState나 useRef를 활용하여 검색어를 관리하는 변수를 선언하세요. 
   //  - 단, 뭐가 더 효율적인지 생각한 후 작업하세요.
-  
+  const searchRef = useRef<HTMLInputElement>(null);
+
   // #2. 검색결과 저장용 state 선언
   //  - 검색결과를 저장할 state를 선언하세요.
   //  - 이 state의 초기값은 null로 지정하세요(검색결과 없음을 의미)
@@ -35,14 +35,23 @@ function BoardSearch({list}: {list: typeof boardList}) {
   //    게시글정보만 필터링합니다 
   // - 필터링 결과는 2번 검색결과 저장용 state의 state변경함수를 통하여 저장합니다.
   // - 검색결과가 존재하지 않거나, 입력한 검색어가 비어있는 경우 null값을 저장합니다.
-  const onSearchHandler;
+  const onSearchHandler = function(){
+    const keyword = searchRef.current?.value
+    if(!keyword){
+      alert("검색어를 입력하세요.")
+      setResult(null);
+      return;
+    }
+    const found = list.filter(b => b.boardTitle.includes(keyword))
+    setResult(found);
+  };
   
   // #4. 
   return (
     <>
       <div>
         <h2>실습문제 4 : 게시판 검색</h2>
-        <input type="text" placeholder="검색어를 입력하세요." />
+        <input type="text" ref={searchRef} placeholder="검색어를 입력하세요." />
         <button onClick={onSearchHandler}>검색</button>
       </div>
 
@@ -54,6 +63,20 @@ function BoardSearch({list}: {list: typeof boardList}) {
             // - result가 null인 경우, 검색결과가 없습니다가 표시되도록 조건부 랜더링하세요.
             // - 구현 화면은 아래이미지를 참고하세요.(완벽히 똑같지 않아도 ok)
             // - 렌더링 성능향상을 위해 key값을 설정하세요
+            result && result.length > 0 ? 
+            (
+              result.map(b => {
+                return(
+                  <ul key={b.boardNo}>
+                    <li><strong>번호 : </strong>{b.boardNo}</li>
+                    <li><strong>제목 : </strong>{b.boardTitle}</li>
+                    <li><strong>내용 : </strong>{b.boardContent}</li>
+                    <li><strong>작성자 : </strong>{b.boardWriter}</li>
+                    <li><strong>작성일 : </strong>{b.boardDate}</li>
+                  </ul>
+                )
+              })
+            ) : <p>검색 결과가 없습니다.</p>
           }
       </div>
     </>

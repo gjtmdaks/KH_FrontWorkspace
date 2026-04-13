@@ -37,7 +37,7 @@ function UserInfo({user, setUser}: UserInfoProps) {
       <h2>사용자 정보</h2>
       <h3>이름: {user.name}</h3>
       <h3>나이: {user.age}</h3>
-      <h3>취미: {user.hobby[0]},{user.hobby[1]}</h3>
+      <h3>취미: {user.hobby.toString()}</h3>
      <button onClick={handleChangeName}>정보 변경변경</button>
     </div>
   );
