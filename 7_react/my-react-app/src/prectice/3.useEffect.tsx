@@ -24,11 +24,11 @@ function AutoSaveEditor() {
   // - 값을 입력하는 동안에는 saved상태값을 false로 변경되도록 하세요.
   // localStorage.setItem(key, value) : localStorage 데이터 저장메서드
   useEffect(() => {
+    // 입력값이 없으면 타이머 실행 X
+    if (!text || text === localStorage.getItem(STORAGE_KEY)) return;
+
     // 입력 중이면 저장 상태 false
     setSaved(false);
-
-    // 입력값이 없으면 타이머 실행 X
-    if (!text) return;
 
     const timer = setTimeout(() => {
       localStorage.setItem(STORAGE_KEY, text);
