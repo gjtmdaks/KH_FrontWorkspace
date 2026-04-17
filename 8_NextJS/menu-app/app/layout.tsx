@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./components/Header";
+import Providers from "./components/Provider";
 /*
   #1. app/layout.tsx
    - 최상위 공용 레이아웃으로 서버컴포넌트
@@ -25,12 +26,14 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <div id="container">
-          <Header />
-          <section id="content">
-            <div id="menu-container" className="text-center">
-              {children}
-            </div>
-          </section>
+          <Providers>
+            <Header />
+            <section id="content">
+              <div id="menu-container" className="text-center">
+                {children}
+              </div>
+            </section>
+          </Providers>
         </div>
       </body>
     </html>
