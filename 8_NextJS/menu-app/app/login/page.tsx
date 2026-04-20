@@ -25,7 +25,7 @@ export default function Login(){
         setLoading(true);
         setError("");
 
-        api.post("/auth/login",{email, password}, {withCredentials: true})
+        api.post("/auth/login",{email, password})
         .then( response => {
             handleLoginSync(response.data.user, response.data.accessToken);
             // 로그인 성공시 실행할 로직.
@@ -95,7 +95,7 @@ export default function Login(){
     }
 
     const handleKakaoLogin = () => {
-
+        window.location.href = "http://localhost:8081/api/oauth2/authorization/kakao"
     }
 
     return (

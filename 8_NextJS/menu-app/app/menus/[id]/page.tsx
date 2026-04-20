@@ -38,6 +38,7 @@ export default async function MenuDetailPage({ params }: Props) {
             </div>
         );
     }catch(error){
+        console.log(error);
         return (
             <div>
                 데이터를 불러오는 중 에러가 발생했습니다.
