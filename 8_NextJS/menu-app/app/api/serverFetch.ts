@@ -9,7 +9,7 @@ export const serverFetch = async(endpoint:string, options:RequestInit={}) => {
 
     // 미들웨어 추가시 미들웨어가 재발급한 토큰이 있는지 확인 필요(나중에 하기)
     const accessToken =
-        headerList.get('x-new-access-token') ?? cookieStore.get('accesstoken')?.value ?? "";
+        headerList.get('x-new-access-token') ?? cookieStore.get('accessToken')?.value ?? "";
 
     // 미들웨어 추가전
     // const accessToken = cookieStore.get('accessToken')?.value;
